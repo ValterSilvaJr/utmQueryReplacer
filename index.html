@@ -1,0 +1,50 @@
+// Criado por: Valter Silva <https://github.com/ValterSilvaJr>
+// Versão: 1.0.0
+// Data de criação: 14/04/2022
+// Última atualização: 14/04/2022
+// Objetivo: Código javascript criado para sobrescrever as utms em caso de primeiro acesso sem as mesmas estarem presentes
+
+<script>
+  function getQuery(queryName){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    return urlParams.get(queryName);
+  }
+
+  const inputs = document.getElementsByTagName('input')
+
+  const utm_fields = [
+    {
+      field: 25,
+      name: 'utm_source',
+      value: getQuery("utm_source"),
+    },
+    {
+      field: 26,
+      name: 'utm_medium',
+      value: getQuery("utm_medium"),
+    },
+    {
+      field: 27,
+      name: 'utm_campaign',
+      value: getQuery("utm_campaign"),
+    },
+    {
+      field: 28,
+      name: 'utm_term',
+      value: getQuery("utm_term"),
+    },
+    {
+      field: 29,
+      name: 'utm_content',
+      value: getQuery("utm_content"),
+    }
+  ]
+
+  for(i = 0; i < utm_fields.length; i++) {
+    for(j = 0; j < inputs.length; j++) {
+      if(inputs[j].name == `field[${utm_fields[i].field}]`)
+        inputs[j].value = utm_fields[i].value
+      }
+  }
+</script>
